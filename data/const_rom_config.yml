@@ -117,3 +117,12 @@ data:
     value: 0x7a06534bb8bdb49fd5e9e6632722c2989467c1bfc8e8d978dfb425d2685c2573
   - name : ca_p256k1_k42
     value: 0x6484aa716545ca2cf3a70c3fa8fe337e0a3d21162f0d6299a7bf8192bfd2a76f
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# secp256k1 BIP340 constants
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+  - name : ca_bip340_nonce        # sha256("BIP0340/nonce")
+    value : 0x07497734a79bcb355b9b8c7d034f121cf434d73ef72dda19870061fb52bfeb2f
+  - name : ca_bip340_challenge    # sha256("BIP0340/challenge")
+    value : 0x7bb52d7a9fef58323eb1bf7a407db382d2f3f2d81bb1224f49fe518f6d48d37c
+  - name : ca_bip340_aux          # sha256("BIP0340/aux")
+    value : 0xf1ef4e5ec063cada6d94cafa9d987ea069265839ecc11f972d77a52ed8c1cc90
