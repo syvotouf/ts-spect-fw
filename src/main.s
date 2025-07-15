@@ -55,7 +55,6 @@ _start:
     ; First clear the Data RAM Out
     MOVI    r31, 0
     CALL    clear_data_out
-    CALL    clear_emem_out
 
     LD      r0, ca_spect_cfg_word
     ADDI    r0, r0, 0                           ; force bits [255:32] to 0
@@ -97,11 +96,14 @@ od_id_check_dbg:
     CMPI    r1, ecdsa_sign_dbg_id
     BRZ     op_ecdsa_dbg
 
-    JMP     invalid_op_id
 .endif
+    JMP     invalid_op_id
 
 ; ==============================================================================
 op_ecc_key:
+    ; Clear CPB Result Buffer
+    CALL    clear_emem_out
+
     ; Compose DST for ecc_key ops
     ORI     r5,  r5, gfp_gen_dst_ecc_key
     ROL8    r5,  r5
@@ -146,6 +148,9 @@ op_x25519:
 
 ; ==============================================================================
 op_eddsa:
+    ; Clear CPB Result Buffer
+    CALL    clear_emem_out
+
     ; Compose GF(p) gen DST for eddsa ops
     ORI     r5,  r5, gfp_gen_dst_eddsa
     ROL8    r5,  r5
@@ -186,6 +191,9 @@ op_eddsa:
 
 ; ==============================================================================
 op_ecdsa:
+    ; Clear CPB Result Buffer
+    CALL    clear_emem_out
+
     ; Compose GF(p) gen DST for ecdsa ops
     ORI     r5,  r5, gfp_gen_dst_ecdsa
     ROL8    r5,  r5
@@ -207,7 +215,7 @@ invalid_op_id:
     JMP     set_res_word
 
 ; ==============================================================================
-; Routines for geting fields from SPECT_CFG_WORD
+; Routines for getting fields from SPECT_CFG_WORD
 ; ==============================================================================
 get_input_base:
 .ifdef IN_SRC_EN
